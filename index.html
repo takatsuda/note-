@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Followers Distribution (Log Bins)</title>
+  <title>Followers Distribution (Logarithmic Bins)</title>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body style="margin:0; padding:0; display:flex; justify-content:center; align-items:center; height:100vh; background:#fff;">
   <div id="plot" style="width:95vw; height:85vh;"></div>
 
   <script>
-    // フォロワー数データ
+    // フォロワー数データ（例）
     var followers = [
       6, 18, 20, 25, 38, 55, 60, 72, 80, 95,
       100, 120, 140, 160, 200, 220, 250, 280,
@@ -19,20 +19,22 @@
       8000, 10000, 12000, 15000, 17000
     ];
 
+    // 対数的に区切るビン境界を自作
+    var logBins = [1, 3, 10, 30, 100, 300, 1000, 3000, 10000, 30000];
+
     var trace = {
       x: followers,
       type: "histogram",
-      autobinx: false,
       xbins: {
-        start: 1,
-        end: 20000,
-        size: 0 // ← 無効化して自動にさせる
+        start: logBins[0],
+        end: logBins[logBins.length - 1],
       },
+      autobinx: false,
       marker: { color: "steelblue" }
     };
 
     var layout = {
-      title: { text: "Distribution of Followers (Logarithmic Scale)", x:0.5 },
+      title: { text: "Distribution of Followers (Logarithmic Bins)", x:0.5 },
       xaxis: {
         title: "Followers",
         type: "log",
