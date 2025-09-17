@@ -1,1 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Followers Distribution (Log Bins)</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body style="margin:0; padding:0; display:flex; justify-content:center; align-items:center; height:100vh; background:#fff;">
+  <div id="plot" style="width:95vw; height:85vh;"></div>
 
+  <script>
+    var data = [{
+      x: [6, 18, 20, 25, 38, 55, 60, 72, 80, 95, 100, 120, 140, 160, 200, 220, 250, 280, 300, 320, 400, 500, 600, 800, 1000, 1200, 1500, 2000, 2500, 3000, 4000, 5000, 6000, 8000, 10000, 12000, 15000, 17000],
+      type: "histogram",
+      xbins: {
+        start: 1,
+        end: 20000,
+        size: 0.1
+      },
+      marker: { color: "steelblue" }
+    }];
+
+    var layout = {
+      title: { text: "Distribution of Followers (Logarithmic Bins)", x:0.5 },
+      xaxis: {
+        title: "Followers",
+        type: "log",
+        tickvals: [10, 100, 1000, 10000],
+        ticktext: ["10", "100", "1,000", "10,000"]
+      },
+      yaxis: { title: "Count" },
+      bargap: 0.05
+    };
+
+    Plotly.newPlot("plot", data, layout, {responsive: true});
+  </script>
+</body>
+</html>
